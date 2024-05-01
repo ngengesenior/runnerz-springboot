@@ -2,22 +2,18 @@ package com.ngenge.runners.run;
 
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
 @RestController
 @RequestMapping("/api/runs")
 public class RunController {
-    private final RunRepository runRepository;
+    private final JdbcClientRunRepository runRepository;
 
     // Constructor injection
-    public RunController(RunRepository runRepository) {
+    public RunController(JdbcClientRunRepository runRepository) {
         this.runRepository = runRepository;
     }
 
