@@ -1,0 +1,17 @@
+GET http://localhost:8080/api/runs
+
+### Find By ID that doesn't exist
+GET http://localhost:8080/api/runs/1
+
+### Create invalid run throws exception
+POST http://localhost:8080/api/runs
+Content-Type: application/json
+
+{
+  "id": 19,
+  "title": "Monday",
+  "startTime": "2025-04-22T07:00:00",
+  "completedOn": "2024-04-22T09:00:00",
+  "miles": 8,
+  "location": "INDOOR"
+}
