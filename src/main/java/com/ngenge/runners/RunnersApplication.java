@@ -1,9 +1,16 @@
 package com.ngenge.runners;
 
+import com.ngenge.runners.user.UserHttpClient;
+import com.ngenge.runners.user.UserRestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.support.RestClientAdapter;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 
 @SpringBootApplication
@@ -15,18 +22,21 @@ public class RunnersApplication {
         SpringApplication.run(RunnersApplication.class, args);
     }
 
-    /*@Bean
-    CommandLineRunner runner(RunRepository runRepository) {
+    @Bean
+    UserHttpClient userHttpClient() {
+        RestClient restClient = RestClient.create("https://jsonplaceholder.typicode.com");
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient)).build();
+        return factory.createClient(UserHttpClient.class);
+    }
+
+    @Bean
+    CommandLineRunner runner(
+            //UserRestClient client
+            UserHttpClient client
+    ) {
         return args -> {
-            Run run = new Run(
-                    1,
-                    "First run",
-                    LocalDateTime.now(),
-                    LocalDateTime.now().plusHours(1),
-                    18,
-                    Location.INDOOR);
-            runRepository.create(run);
+            System.out.println(client.findAll());
         };
-    }*/
+    }
 
 }

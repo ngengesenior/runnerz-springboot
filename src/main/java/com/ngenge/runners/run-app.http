@@ -1,5 +1,8 @@
 GET http://localhost:8080/api/runs
 
+### Find Runs by location
+GET http://localhost:8080/api/runs/location/INDOOR
+
 ### Find By ID that doesn't exist
 GET http://localhost:8080/api/runs/1
 
