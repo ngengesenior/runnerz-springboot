@@ -25,7 +25,7 @@ public class JdbcClientRunRepository {
     }
 
     Optional<Run> findById(Integer id) {
-        return jdbcClient.sql("select id,title,started_on,completed_on,miles,location FROM Run WHERE id = :id")
+        return jdbcClient.sql("select id,title,started_on,completed_on,miles,location,version FROM Run WHERE id = :id")
                 .param("id", id)
                 .query(Run.class)
                 .optional();
